@@ -73,14 +73,15 @@ class Student:
         def addStd():
             with open('StudentData.csv', "a", newline="") as file:
                 csvfile = csv.writer(file)
-                if StudID.get()=="" or FirstName.get()=="" or MiddleName.get()=="" or LastName.get()=="" or YearLevel.get()=="":
+                if StudID.get()=="" or FirstName.get()=="" or MiddleName.get()=="" or LastName.get()=="" or YearLevel.get()=="" or Gender.get()=="" or Course.get()=="":
                     tkinter.messagebox.showinfo("MSU-IIT SIS","Fill in the box.")
                 else:
                     self.data[StudID.get()] = {'Last Name': LastName.get(), 'First Name': FirstName.get(), 'Middle Name': MiddleName.get(), 'Gender': Gender.get(),'Year Level': YearLevel.get(), 'Course': Course.get()}
                     self.saveData()
-                    tkinter.messagebox.showinfo("MSU-IIT SIS", "Success!")
+                    tkinter.messagebox.showinfo("MSU-IIT SIS", "Successfully added!")
+                    DisplayStd()
                 ClearStd()
-                DisplayStd()
+
                     
         def ClearStd():
             StudID.set("")
@@ -110,7 +111,6 @@ class Student:
                 tkinter.messagebox.showerror("MSU-IIT SIS","Select a student")
                 return
             id_no = tree.item(tree.focus(),"values")[0]
-            
             self.data.pop(id_no, None)
             self.saveData()
             tree.delete(tree.focus())
@@ -143,14 +143,14 @@ class Student:
         def updateStd():
             with open('StudentData.csv', "a", newline="") as file:
                 csvfile = csv.writer(file)
-                if StudID.get()=="" or FirstName.get()=="" or MiddleName.get()=="" or LastName.get()=="" or YearLevel.get()=="":
+                if StudID.get()=="" or FirstName.get()=="" or MiddleName.get()=="" or LastName.get()=="" or YearLevel.get()=="" or Gender.get()=="" or Course.get()=="":
                     tkinter.messagebox.showinfo("MSU-IIT SIS","Select a student")
                 else:
                     self.data[StudID.get()] = {'Last Name': LastName.get(), 'First Name': FirstName.get(), 'Middle Name': MiddleName.get(), 'Gender': Gender.get(),'Year Level': YearLevel.get(), 'Course': Course.get()}
                     self.saveData()
                     tkinter.messagebox.showinfo("MSU-IIT SIS", "Successfully Updated")
-                ClearStd()
-                DisplayStd()     
+                DisplayStd()
+                ClearStd()     
 
         #============================================================FRAMES=====================================================================#
 
@@ -220,23 +220,27 @@ class Student:
 
         #============================================================BUTTON WIDGET====================================================#
 
-        self.btnAddData = Button(ButtonFrame,text="Add", font=("Source code",10,"bold"),bg="Firebrick", fg="white", height=2, width=14, bd=5,command=addStd)
+        self.btnAddData = Button(ButtonFrame,text="Add", font=("Source code",10,"bold"),bg="Firebrick", fg="white", height=2, width=12, bd=5,command=addStd)
         self.btnAddData.grid(row=0, column=0, padx=15, pady=15)
         self.btnAddData.place(x=20,y=10)
 
-        self.btnUpdateData = Button(ButtonFrame, text="Update", font=("Source code",10,"bold"),bg="Firebrick", fg="white", height=2, width=14, bd=5, command=updateStd)
+        self.btnUpdateData = Button(ButtonFrame, text="Update", font=("Source code",10,"bold"),bg="Firebrick", fg="white", height=2, width=12, bd=5, command=updateStd)
         self.btnUpdateData.grid(row=0, column=2, padx=15, pady=15)
         self.btnUpdateData.place(x=20,y=70)
 
-        self.btnClearData = Button(ButtonFrame, text="Clear", font=("Source code",10,"bold"),bg="Firebrick", fg="white", height=2, width=14, bd=5,command=ClearStd)
+        self.btnClearData = Button(ButtonFrame, text="Clear", font=("Source code",10,"bold"),bg="Firebrick", fg="white", height=2, width=12, bd=5,command=ClearStd)
         self.btnClearData.grid(row=1, column=0,padx=15, pady=15)
         self.btnClearData.place(x=180,y=10)
 
-        self.btnDeleteData = Button(ButtonFrame, text="Delete", font=("Source code",10,"bold"),bg="Firebrick", fg="white", height=2, width=14, bd=5, command=deleteStd)
+        self.btnDeleteData = Button(ButtonFrame, text="Delete", font=("Source code",10,"bold"),bg="Firebrick", fg="white", height=2, width=12, bd=5, command=deleteStd)
         self.btnDeleteData.grid(row=1, column=1,padx=15, pady=15)
         self.btnDeleteData.place(x=180,y=70)
 
-        self.btnExit = Button(ButtonFrame, text="Exit", font=("Source code",10,"bold"),bg="Firebrick", fg="white", height=6, width=12, bd=4, command=iExit)
+        self.btnExit = Button(ButtonFrame, text="Exit", font=("Source code",10,"bold"),bg="Firebrick", fg="white", height=2, width=12, bd=5, command=iExit)
+        self.btnExit.grid(row=1, column=2,padx=15, pady=15)
+        self.btnExit.place(x=330,y=70)
+
+        self.btnExit = Button(ButtonFrame, text="Display", font=("Source code",10,"bold"),bg="Firebrick", fg="white", height=2, width=12, bd=5, command=DisplayStd)
         self.btnExit.grid(row=1, column=2,padx=15, pady=15)
         self.btnExit.place(x=330,y=10)
 
@@ -288,9 +292,6 @@ class Student:
         tree.column("YearLevel", width=120,anchor='center')
         tree.column("Course", width=100,anchor='center')
         tree.pack(fill=BOTH,expand=1,anchor='center')
-        
-        DisplayStd()
-
         
         #===========================================================================================================================================================#
     def saveData(self):
