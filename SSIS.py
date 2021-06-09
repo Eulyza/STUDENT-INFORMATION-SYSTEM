@@ -240,9 +240,9 @@ class Student:
         self.btnExit.grid(row=1, column=2,padx=15, pady=15)
         self.btnExit.place(x=330,y=70)
 
-        self.btnExit = Button(ButtonFrame, text="Display", font=("Source code",10,"bold"),bg="Firebrick", fg="white", height=2, width=12, bd=5, command=DisplayStd)
-        self.btnExit.grid(row=1, column=2,padx=15, pady=15)
-        self.btnExit.place(x=330,y=10)
+        self.btnDisplay = Button(ButtonFrame, text="Display", font=("Source code",10,"bold"),bg="Firebrick", fg="white", height=2, width=12, bd=5, command=DisplayStd)
+        self.btnDisplay.grid(row=1, column=2,padx=15, pady=15)
+        self.btnDisplay.place(x=330,y=10)
 
         #============================================================DETAIL FRAME====================================================#
         
